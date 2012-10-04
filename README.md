@@ -20,10 +20,11 @@ curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | 
 **Setup itg.zsh-theme**
 
 * Install the included font & set your terminal font to 'Monaco for Powerline'
-* Put the .zshrc in your home directory (~)
-* Edit your PATH in the .zshrc file to fit your needs
+* Put the `.zshrc` file in your home directory (~)
+* Put the `itg.zsh-theme` file in `~/.oh-my-zsh/themes/`
+* Edit your PATH in the `.zshrc` file to fit your needs
 * Set zsh as your default terminal `chsh -s /bin/zsh`
-* Set your terminal to use 256 colors `export TERM="xterm-256color"`
+* Set your terminal to use 256 colors using `export TERM="xterm-256color"`
 
 
 ### Preview
