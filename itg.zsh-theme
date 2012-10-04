@@ -30,6 +30,22 @@ function git_is_dirty() {
   fi
 }
 
+function itg_git_prompt_info() {
+  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
+  echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$(parse_git_dirty)$(itg_git_prompt_ahead)$ZSH_THEME_GIT_PROMPT_SUFFIX"
+}
+
+function itg_git_prompt_ahead() {
+  if $(echo "$(git log $(itg_git_current_upstream)/$(current_branch)..HEAD 2> /dev/null)" | grep '^commit' &> /dev/null); then
+    echo "$ZSH_THEME_GIT_PROMPT_AHEAD"
+  fi
+}
+
+function itg_git_current_upstream() {
+  local upstream=$(git config --get branch."$(current_branch)".remote) || return
+  echo $upstream
+}
+
 # Prompt builder functions
 function itg_dir() {
   echo -n "%K{$blue} %F{$black}%1~"
@@ -55,7 +71,7 @@ function itg_git() {
     git_suffix="%F{$blue}⮀"
   fi
 
-  echo -e "$git_prefix$(git_prompt_info) %K{$darker_green}$git_suffix"
+  echo -e "$git_prefix$(itg_git_prompt_info) %K{$darker_green}$git_suffix"
 }
 
 function itg_pair() {
@@ -77,3 +93,7 @@ function precmd {
 $(itg_dir)$(itg_git)$(itg_pair) "
   RPROMPT="$(itg_rvm)"
 }
+
+ZSH_THEME_GIT_PROMPT_AHEAD="↑"
+ZSH_THEME_GIT_PROMPT_BEHIND="↓"
+ZSH_THEME_GIT_PROMPT_DIVERGED="↕"
