@@ -87,13 +87,13 @@ ZSH_THEME_GIT_PROMPT_SUFFIX=''
 ZSH_THEME_GIT_PROMPT_DIRTY='%F{$darker_green} ✍'
 ZSH_THEME_GIT_PROMPT_CLEAN=''
 
+ZSH_THEME_GIT_PROMPT_AHEAD="%{$yellow}↑"
+ZSH_THEME_GIT_PROMPT_BEHIND="%{$yellow}↓"
+ZSH_THEME_GIT_PROMPT_DIVERGED="%{$yellow}↕"
+
 # command to make sure the prompt reruns the functions on new prompt
 function precmd {
   PROMPT="
 $(itg_dir)$(itg_git)$(itg_pair) "
   RPROMPT="$(itg_rvm)"
 }
-
-ZSH_THEME_GIT_PROMPT_AHEAD="↑"
-ZSH_THEME_GIT_PROMPT_BEHIND="↓"
-ZSH_THEME_GIT_PROMPT_DIVERGED="↕"
