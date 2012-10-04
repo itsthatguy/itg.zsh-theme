@@ -97,3 +97,4 @@ function precmd {
 $(itg_dir)$(itg_git)$(itg_pair) "
   RPROMPT="$(itg_rvm)"
 }
+
