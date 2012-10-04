@@ -1,7 +1,7 @@
 itg.zsh-theme
 =============
 
-A designer developer zsh prompt
+A designer developed zsh prompt
 
 ### Installation
 **install zsh:**
