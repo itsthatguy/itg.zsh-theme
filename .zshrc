@@ -10,10 +10,16 @@ ZSH_THEME="itg"
 # My customizations
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
+# MY aliases
+alias rake='noglob rake'
+alias postgres.start='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
+alias postgres.stop='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
 
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+alias mm="middleman"
+alias gphm="git push heroku master"
+
+alias eae="vim ~/.zshrc"
+alias eax="source ~/.zshrc"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -33,9 +39,16 @@ ZSH_THEME="itg"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git sublime rvm)
+plugins=(git sublime osx)
 
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 export PATH=PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin
+
+export PGHOST=localhost
+
+# Fix for zsh & iterm new tab bug
+[[ -e .rvmrc ]] && source .rvmrc
+
+
