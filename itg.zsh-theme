@@ -48,7 +48,20 @@ function itg_git_current_upstream() {
 
 # Prompt builder functions
 function itg_dir() {
-  echo -n "%K{$blue} %F{$black}%1~"
+  if git rev-parse --git-dir > /dev/null 2>&1 && [ ! -d .git ]; then
+    git_dir_cdup=$(git rev-parse --show-cdup)
+    git_dir_top=$(cd $git_dir_cdup; echo ${PWD##*/})
+    git_dir_path=$(git rev-parse --show-prefix)
+    dir="⭠ $git_dir_top/$git_dir_path"
+  else
+    if [ -d .git ]; then
+      prefix="⭠ "
+    else
+      prefix=""
+    fi
+    dir="$prefix%1~"
+  fi
+  echo -n "%K{$blue} %F{$black}$dir"
 }
 
 function itg_git() {
@@ -63,15 +76,17 @@ function itg_git() {
   fi
 
   # Is this a git directory?
-  if [ -d .git ]; then
-    git_prefix=" %K{$git_status_color_k}%F{$blue}⮀ %F{$git_status_color_f}⭠ "
+  if git rev-parse --git-dir > /dev/null 2>&1; then
+    git_prefix=" %K{$git_status_color_k}%F{$blue}⮀ %F{$git_status_color_f}"
     git_suffix="%F{$git_status_color_k}⮀"
+    git_status=$(itg_git_prompt_info)
   else
     git_prefix=""
     git_suffix="%F{$blue}⮀"
+    git_status=""
   fi
 
-  echo -e "$git_prefix$(itg_git_prompt_info) %K{$darker_green}$git_suffix"
+  echo -e "$git_prefix$git_status %K{$darker_green}$git_suffix"
 }
 
 function itg_pair() {
