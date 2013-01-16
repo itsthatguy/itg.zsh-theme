@@ -16,10 +16,12 @@ brew install zsh
 curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
 ```
 
+**Download the theme**
 ```
 curl https://raw.github.com/itsthatguy/itg.zsh-theme/master/itg.zsh-theme > ~/.oh-my-zsh/themes/itg.zsh-theme
 ```
 
+**Download the default .zshrc**
 ```
 curl https://raw.github.com/itsthatguy/itg.zsh-theme/master/.zshrc > ~/.zshrc
 ```
