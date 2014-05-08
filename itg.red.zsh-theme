@@ -1,7 +1,7 @@
 # itg.zsh-theme
 # a designer developed zsh Prompt
 # twitter: @itg
-# https://gist.github.com/3834711
+# https://github.com/itsthatguy/itg.zsh-theme
 
 # Colors:
 local black=235
@@ -14,6 +14,14 @@ local darker_green=023
 local red=160
 local darker_red=124
 local darkest_red=88
+
+
+# COLOR LOVE
+echo "REDEFINING COLORS"
+printf '\e]4;160;rgb:F3/56/56\e\\\e[38;5;160m██ = RED\e[m\n'
+printf '\e]4;124;rgb:CA/40/40\e\\\e[38;5;124m██ = DARKER_RED\e[m\n'
+printf '\e]4;88;rgb:98/37/37\e\\\e[38;5;88m██ = DARKEST_RED\e[m\n'
+
 
 # Extending the git library locally
 function git_user_initials {
