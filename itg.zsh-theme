@@ -5,12 +5,15 @@
 
 # Colors:
 local black=235
-local dark=236
+local dark=008
 local white=015
 local yellow=003
 local blue=038
 local darker_blue=030
 local darker_green=023
+local red=160
+local darker_red=124
+local darkest_red=88
 
 # Extending the git library locally
 function git_user_initials {
@@ -90,16 +93,25 @@ function itg_git() {
 }
 
 function itg_pair() {
-  echo " %F{$yellow}$(git_user_initials) %k%F{$darker_green}⮀%f"
+  echo " %F{$yellow}$(git_user_initials) %k%F{$darkest_green}⮀%f"
 }
 
 function itg_rvm() {
-  echo "%F{$dark}⮂%K{$dark}%F{$white} $(rvm_prompt_info) %k"
+  echo -e "%F{$dark}⮂%K{$dark}%F{$white} $(rvm_prompt_info) %k"
+}
+
+function itg_wrap_right() {
+  echo -e "%F{$dark}⮂%K{$dark}%F{$white} $* %k"
+}
+
+function itg_host() {
+  item=$(itg_wrap_right %m)
+  echo -e "${item}"
 }
 
 ZSH_THEME_GIT_PROMPT_PREFIX=''
 ZSH_THEME_GIT_PROMPT_SUFFIX=''
-ZSH_THEME_GIT_PROMPT_DIRTY='%F{$darker_green} ✍'
+ZSH_THEME_GIT_PROMPT_DIRTY='%F{$darkest_green} ✍'
 ZSH_THEME_GIT_PROMPT_CLEAN=''
 
 ZSH_THEME_GIT_PROMPT_AHEAD="↑"
@@ -110,6 +122,6 @@ ZSH_THEME_GIT_PROMPT_DIVERGED="↕"
 function precmd {
   PROMPT="
 $(itg_dir)$(itg_git)$(itg_pair) "
-  RPROMPT="$(itg_rvm)"
+  RPROMPT="$(itg_host)"
 }
 

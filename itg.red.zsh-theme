@@ -11,9 +11,9 @@ local yellow=003
 local blue=038
 local darker_blue=030
 local darker_green=023
-local darkest_red=001
-local darker_red=160
-local red=009
+local red=160
+local darker_red=124
+local darkest_red=88
 
 # Extending the git library locally
 function git_user_initials {
