@@ -1,26 +1,18 @@
 # itg.zsh-theme
 # a designer developed zsh Prompt
 # twitter: @itg
-# https://github.com/itsthatguy/itg.zsh-theme
+# https://gist.github.com/3834711
 
 # Colors:
 local black=235
-local dark=008
+local dark=00
 local white=015
 local yellow=003
-local blue=038
+local blue=037
 local darker_blue=030
-local darker_green=023
+local darkest_blue=023
 local red=160
 local darker_red=124
-local darkest_red=88
-
-
-# COLOR LOVE
-echo "REDEFINING COLORS"
-printf '\e]4;160;rgb:F3/56/56\e\\\e[38;5;160m██ = RED\e[m\n'
-printf '\e]4;124;rgb:CA/40/40\e\\\e[38;5;124m██ = DARKER_RED\e[m\n'
-printf '\e]4;88;rgb:98/37/37\e\\\e[38;5;88m██ = DARKEST_RED\e[m\n'
 local darkest_red=88
 
 # Extending the git library locally
@@ -32,7 +24,7 @@ function git_user_initials {
 function git_is_dirty() {
   local SUBMODULE_SYNTAX=''
   if [[ $POST_1_7_2_GIT -gt 0 ]]; then
-        SUBMODULE_SYNTAX="--ignore-submodules=dirty"
+    SUBMODULE_SYNTAX="--ignore-submodules=dirty"
   fi
   if [[ -n $(git status -s ${SUBMODULE_SYNTAX}  2> /dev/null) ]]; then
     return 0
@@ -80,7 +72,7 @@ function itg_git() {
   # This check is done first to set colors
   if ($(git_is_dirty)); then
     git_status_color_k=$yellow
-    git_status_color_f=$darker_green
+    git_status_color_f=$darkest_blue
   else
     git_status_color_k=$darker_blue
     git_status_color_f=$black
@@ -97,29 +89,30 @@ function itg_git() {
     git_status=""
   fi
 
-  echo -e "$git_prefix$git_status %K{$darker_green}$git_suffix"
+  echo -e "$git_prefix$git_status %K{$darkest_blue}$git_suffix"
 }
 
 function itg_pair() {
-  echo " %F{$yellow}$(git_user_initials) %k%F{$darkest_green}⮀%f"
+  echo " %F{$yellow}$(git_user_initials) %k%F{$darkest_blue}⮀%f"
 }
 
 function itg_rvm() {
-  echo -e "%F{$dark}⮂%K{$dark}%F{$white} $(rvm_prompt_info) %k"
+  echo -e "$(random_giggle)"
 }
 
 function itg_wrap_right() {
-  echo -e "%F{$dark}⮂%K{$dark}%F{$white} $* %k"
+  echo -e "%F{$blue}⮂%K{$blue}%F{$black} $(itg_rvm) %k"
 }
 
 function itg_host() {
-  item=$(itg_wrap_right %m)
+  item=$(itg_wrap_right %t)
   echo -e "${item}"
 }
 
+
 ZSH_THEME_GIT_PROMPT_PREFIX=''
 ZSH_THEME_GIT_PROMPT_SUFFIX=''
-ZSH_THEME_GIT_PROMPT_DIRTY='%F{$darkest_green} ✍'
+ZSH_THEME_GIT_PROMPT_DIRTY='%F{$darkest_blue} ✍'
 ZSH_THEME_GIT_PROMPT_CLEAN=''
 
 ZSH_THEME_GIT_PROMPT_AHEAD="↑"
