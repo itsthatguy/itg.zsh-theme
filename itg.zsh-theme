@@ -96,12 +96,10 @@ function itg_pair() {
   echo " %F{$yellow}$(git_user_initials) %k%F{$darkest_blue}⮀%f"
 }
 
-function itg_rvm() {
-  echo -e "$(random_giggle)"
-}
-
 function itg_wrap_right() {
-  echo -e "%F{$blue}⮂%K{$blue}%F{$black} $(itg_rvm) %k"
+  if type "$random_giggle" > /dev/null; then
+    echo -e "%F{$blue}⮂%K{$blue}%F{$black} $(random_giggle) %k"
+  fi
 }
 
 function itg_host() {
