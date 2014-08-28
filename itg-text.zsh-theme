@@ -96,7 +96,7 @@ function itg_git() {
   if ($(git_is_dirty)); then
     git_status_color_f=$warning
   else
-    git_status_color_f=$good
+    git_status_color_f=$fade
   fi
 
   # Is this a git directory?
