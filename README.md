@@ -46,3 +46,8 @@ Commit Ahead
 
 Dirty Branch
 ![image](http://i.imgur.com/b3xPc.png)
+
+
+### Extra
+itg-text.zsh-theme
+![image](http://i.imgur.com/vMatGY0.png)
