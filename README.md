@@ -3,38 +3,23 @@ itg.zsh-theme
 
 A designer developed zsh prompt
 
+## Now with better instructions!
+
 ### Installation
-**install zsh:**
 
-```
+```bash
+# install zsh:
 brew install zsh
-```
 
-**install oh-my- zsh:**
-
-```
+# install oh-my- zsh:
 curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
-```
 
-**Download the theme**
-```
-curl https://raw.githubusercontent.com/itsthatguy/itg.zsh-theme/master/itg.zsh-theme > ~/.oh-my-zsh/themes/itg.zsh-theme
-```
+# Clone this repository
+git clone git@github.com:itsthatguy/itg.zsh-theme.git
 
-**Download the default .zshrc**
+# Run the install script
+./bin/install
 ```
-curl https://raw.githubusercontent.com/itsthatguy/itg.zsh-theme/master/.zshrc > ~/.zshrc
-```
-
-
-**Setup itg.zsh-theme**
-
-* Install the included font & set your terminal font to 'Monaco for Powerline'
-* Put the `.zshrc` file in your home directory (~)
-* Put the `itg.zsh-theme` file in `~/.oh-my-zsh/themes/`
-* Edit your PATH in the `.zshrc` file to fit your needs
-* Set zsh as your default terminal `chsh -s /bin/zsh`
-* Set your terminal to use 256 colors using `export TERM="xterm-256color"`
 
 
 ### Preview
@@ -48,6 +33,6 @@ Dirty Branch
 ![image](http://i.imgur.com/b3xPc.png)
 
 
-### Extra
+### Extra (currently default)
 itg-text.zsh-theme
 ![image](http://i.imgur.com/vMatGY0.png)

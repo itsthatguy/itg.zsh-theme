@@ -8,12 +8,14 @@
 
 
 # Setup the alert function
+
   alert() {
     echo -e "🍗 ${yellow} $1${NC}"
   }
 
 
 # Connecting files to where they go
+
   alert "Creating Symlinks to theme files..."
   ln -s $PWD/itg.zsh-theme $HOME/.oh-my-zsh/themes/itg.zsh-theme
   ln -s $PWD/itg-text.zsh-theme $HOME/.oh-my-zsh/themes/itg-text.zsh-theme
@@ -24,5 +26,23 @@
   cp $PWD/scripts/aliases.sh $HOME/.scripts/aliases.sh
   cp $PWD/scripts/itg-text.zsh-theme $HOME/.scripts/env.sh
 
+
+# Open font to install
+  alert "Opening patched font for you to install..."
+  open Monaco-Powerline.otf
+
+
 # Done?
-  alert "I'm fairly certain we're done..."
+
+  echo
+  alert "I'm fairly certain I'm done..."
+  echo
+  echo  "  You're turn."
+  echo  "  * edit the following files to fit your needs: "
+  echo  "    * ~/.zshenv"
+  echo  "    * ~/.zshrc"
+  echo  "    * ~/.scripts/aliases.sh"
+  echo  "    * ~/.scripts/env.sh"
+  echo  "  * Setup your terminal with the included font"
+  echo
+  alert "Later!"
