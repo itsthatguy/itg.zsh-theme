@@ -134,9 +134,9 @@ ZSH_THEME_GIT_PROMPT_SUFFIX=''
 ZSH_THEME_GIT_PROMPT_DIRTY='%F{$warning} (╯°□°)╯︵┻━┻ '
 ZSH_THEME_GIT_PROMPT_CLEAN=''
 
-ZSH_THEME_GIT_PROMPT_AHEAD="↑"
-ZSH_THEME_GIT_PROMPT_BEHIND="↓"
-ZSH_THEME_GIT_PROMPT_DIVERGED="↕"
+ZSH_THEME_GIT_PROMPT_AHEAD="%F{$good}↑"
+ZSH_THEME_GIT_PROMPT_BEHIND="%F{$warning}↓"
+ZSH_THEME_GIT_PROMPT_DIVERGED="%F{$bad}↕"
 
 # command to make sure the prompt reruns the functions on new prompt
 function precmd {
