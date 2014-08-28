@@ -13,11 +13,14 @@
     echo -e "🍗 ${yellow} $1${NC}"
   }
 
+# Cleanup before install
+  rm -f $HOME/.scripts/random_giggle.rb $HOME/.oh-my-zsh/themes/itg.zsh-theme $HOME/.oh-my-zsh/themes/itg-text.zsh-theme
+
 
 # Connecting files to where they go
 
   alert "Creating Symlinks to theme files..."
-  rm $HOME/.oh-my-zsh/themes/itg.zsh-theme
+  rm -f $HOME/.oh-my-zsh/themes/itg.zsh-theme
   ln -s $PWD/itg.zsh-theme $HOME/.oh-my-zsh/themes/itg.zsh-theme
   ln -s $PWD/itg-text.zsh-theme $HOME/.oh-my-zsh/themes/itg-text.zsh-theme
 
@@ -31,7 +34,7 @@
   mkdir -p $HOME/.scripts
   ln -s $PWD/scripts/random_giggle.rb $HOME/.scripts/random_giggle.rb
   cp $PWD/scripts/aliases.sh $HOME/.scripts/aliases.sh
-  cp $PWD/scripts/itg-text.zsh-theme $HOME/.scripts/env.sh
+  cp $PWD/scripts/env.sh $HOME/.scripts/env.sh
 
 
 # Open font to install
