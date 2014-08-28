@@ -14,7 +14,7 @@
   }
 
 # Cleanup before install
-  rm -f $HOME/.scripts/random_giggle.rb $HOME/.oh-my-zsh/themes/itg.zsh-theme $HOME/.oh-my-zsh/themes/itg-text.zsh-theme
+  rm -f $HOME/.scripts/words.json $HOME/.scripts/random_giggle.rb $HOME/.oh-my-zsh/themes/itg.zsh-theme $HOME/.oh-my-zsh/themes/itg-text.zsh-theme
 
 
 # Connecting files to where they go
@@ -32,6 +32,7 @@
 
   alert "Adding supplemental scripts..."
   mkdir -p $HOME/.scripts
+  ln -s $PWD/scripts/words.json $HOME/.scripts/words.json
   ln -s $PWD/scripts/random_giggle.rb $HOME/.scripts/random_giggle.rb
   cp $PWD/scripts/aliases.sh $HOME/.scripts/aliases.sh
   cp $PWD/scripts/env.sh $HOME/.scripts/env.sh
