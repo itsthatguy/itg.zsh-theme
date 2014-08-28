@@ -17,8 +17,15 @@
 # Connecting files to where they go
 
   alert "Creating Symlinks to theme files..."
+  rm $HOME/.oh-my-zsh/themes/itg.zsh-theme $HOME/.oh-my-zsh/themes/itg-text.zsh-theme
   ln -s $PWD/itg.zsh-theme $HOME/.oh-my-zsh/themes/itg.zsh-theme
   ln -s $PWD/itg-text.zsh-theme $HOME/.oh-my-zsh/themes/itg-text.zsh-theme
+
+  alert "Backing up and installing .zshrc and .zshenv..."
+  mv $HOME/.zshrc $HOME/.zshrc_BACKUP
+  mv $HOME/.zshenv $HOME/.zshenv_BACKUP
+  cp $PWD/.zshrc $HOME/.zshrc
+  cp $PWD/.zshenv $HOME/.zshenv
 
   alert "Adding supplemental scripts..."
   mkdir -p $HOME/.scripts
