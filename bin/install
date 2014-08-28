@@ -17,7 +17,7 @@
 # Connecting files to where they go
 
   alert "Creating Symlinks to theme files..."
-  rm $HOME/.oh-my-zsh/themes/itg.zsh-theme $HOME/.oh-my-zsh/themes/itg-text.zsh-theme
+  rm $HOME/.oh-my-zsh/themes/itg.zsh-theme
   ln -s $PWD/itg.zsh-theme $HOME/.oh-my-zsh/themes/itg.zsh-theme
   ln -s $PWD/itg-text.zsh-theme $HOME/.oh-my-zsh/themes/itg-text.zsh-theme
 
