@@ -35,6 +35,7 @@
 
 
 # Open font to install
+
   alert "Opening patched font for you to install..."
   open Monaco-Powerline.otf
 
