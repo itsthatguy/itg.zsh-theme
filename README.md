@@ -16,6 +16,7 @@ curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | 
 
 # Clone this repository
 git clone git@github.com:itsthatguy/itg.zsh-theme.git
+cd itg.zsh-theme
 
 # Run the install script
 ./bin/install
