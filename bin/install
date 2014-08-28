@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+# Set up the environment
+
+  set -e
+  yellow='\033[1;33m'
+  NC='\033[0m' # No Color
+
+
+# Setup the alert function
+  alert() {
+    echo -e "🍗 ${yellow} $1${NC}"
+  }
+
+
+# Connecting files to where they go
+  alert "Creating Symlinks to theme files..."
+  ln -s $PWD/itg.zsh-theme $HOME/.oh-my-zsh/themes/itg.zsh-theme
+  ln -s $PWD/itg-text.zsh-theme $HOME/.oh-my-zsh/themes/itg-text.zsh-theme
+
+  alert "Adding supplemental scripts..."
+  mkdir -p $HOME/.scripts
+  ln -s $PWD/scripts/random_giggle.rb $HOME/.scripts/random_giggle.rb
+  cp $PWD/scripts/aliases.sh $HOME/.scripts/aliases.sh
+  cp $PWD/scripts/itg-text.zsh-theme $HOME/.scripts/env.sh
+
+# Done?
+  alert "I'm fairly certain we're done..."
