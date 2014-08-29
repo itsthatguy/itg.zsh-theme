@@ -25,7 +25,6 @@ local warning=$yellow
 local good=$cyan
 local bad=$pink
 
-
 # Extending the git library locally
 function git_user_initials {
   MSG=$(git config --get user.initials || echo '')
@@ -54,7 +53,6 @@ function itg_current_branch() {
   ref=$(git rev-parse --short HEAD 2> /dev/null) || return
   echo ${ref#refs/heads/}
 }
-
 
 function itg_git_prompt_ahead() {
   if $(echo "$(git log $(itg_git_current_upstream)/$(itg_current_branch)..HEAD 2> /dev/null)" | grep '^commit' &> /dev/null); then
@@ -86,7 +84,6 @@ function itg_dir() {
   fi
   echo -n "%F{$normal}$dir"
 }
-
 
 #
 # CHANGES THE COLOR/STATUS OF THE GIT BRANCH
@@ -128,7 +125,6 @@ function itg_host() {
   echo -e "${item}"
 }
 
-
 ZSH_THEME_GIT_PROMPT_PREFIX=''
 ZSH_THEME_GIT_PROMPT_SUFFIX=''
 ZSH_THEME_GIT_PROMPT_DIRTY='%F{$warning} (╯°□°)╯︵┻━┻ '
@@ -140,11 +136,10 @@ ZSH_THEME_GIT_PROMPT_DIVERGED="%F{$bad}↕"
 
 # command to make sure the prompt reruns the functions on new prompt
 function precmd {
-  tmp=$(ruby --version | cut -d' ' -f 2)
+  tmp=$(ruby --version | cut -d' ' -f 1-2)
   ruby_version=${tmp/p/-p}
   PROMPT="
 %F{$dark}$ruby_version
 %F{$cyan}╳ %F{$normal} $(itg_dir)$(itg_git)%F{$normal} $(itg_pair)%f"
   RPROMPT="%F{$fade}$(itg_host)"
 }
-
