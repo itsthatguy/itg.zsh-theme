@@ -45,7 +45,7 @@ function git_is_dirty() {
 
 function itg_git_prompt_info() {
   ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-  echo "${ref#refs/heads/}$(parse_git_dirty)$(itg_git_prompt_status)"
+  echo "${ref#refs/heads/}$(parse_git_dirty) $(itg_git_prompt_status)"
 }
 
 function itg_current_branch() {
@@ -159,9 +159,9 @@ ZSH_THEME_GIT_PROMPT_CLEAN=''
 ZSH_THEME_GIT_PROMPT_AHEAD="%F{$good}↑"
 ZSH_THEME_GIT_PROMPT_BEHIND="%F{$warning}↓"
 ZSH_THEME_GIT_PROMPT_DIVERGED="%F{$bad}↕"
-ZSH_THEME_GIT_PROMPT_STAGED="%F{$good}●"
-ZSH_THEME_GIT_PROMPT_UNSTAGED="%F{$warning}●"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%F{$bad}●"
+ZSH_THEME_GIT_PROMPT_STAGED="%F{$warning}●"
+ZSH_THEME_GIT_PROMPT_UNSTAGED="%F{$green}●"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%F{$cyan}●"
 
 # command to make sure the prompt reruns the functions on new prompt
 function precmd {
