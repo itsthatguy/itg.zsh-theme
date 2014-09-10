@@ -45,7 +45,7 @@ function git_is_dirty() {
 
 function itg_git_prompt_info() {
   ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-  echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$(parse_git_dirty)$(itg_git_prompt_ahead)$ZSH_THEME_GIT_PROMPT_SUFFIX"
+  echo "${ref#refs/heads/}$(parse_git_dirty)$(itg_git_prompt_status)"
 }
 
 function itg_current_branch() {
@@ -54,10 +54,36 @@ function itg_current_branch() {
   echo ${ref#refs/heads/}
 }
 
-function itg_git_prompt_ahead() {
-  if $(echo "$(git log $(itg_git_current_upstream)/$(itg_current_branch)..HEAD 2> /dev/null)" | grep '^commit' &> /dev/null); then
-    echo "$ZSH_THEME_GIT_PROMPT_AHEAD"
+function itg_git_prompt_status() {
+  # echo "git fetch"
+  _GST=$(command git status --porcelain -b 2> /dev/null)
+  _STATUS=""
+  if $(echo "$_GST" | grep '^[AMRD]. ' &> /dev/null); then
+    _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_STAGED"
   fi
+  if $(echo "$_GST" | grep '^.[MTD] ' &> /dev/null); then
+    _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_UNSTAGED"
+  fi
+  if $(echo "$_GST" | grep -E '^\?\? ' &> /dev/null); then
+    _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_UNTRACKED"
+  fi
+  if $(echo "$_GST" | grep '^UU ' &> /dev/null); then
+    _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_UNMERGED"
+  fi
+  if $(command git rev-parse --verify refs/stash >/dev/null 2>&1); then
+    _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_STASHED"
+  fi
+  if $(echo "$_GST" | grep '^## .*ahead' &> /dev/null); then
+    _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_AHEAD"
+  fi
+  if $(echo "$_GST" | grep '^## .*behind' &> /dev/null); then
+    _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_BEHIND"
+  fi
+  if $(echo "$_GST" | grep '^## .*diverged' &> /dev/null); then
+    _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_DIVERGED"
+  fi
+  echo $_STATUS
+
 }
 
 function itg_git_current_upstream() {
@@ -127,12 +153,15 @@ function itg_host() {
 
 ZSH_THEME_GIT_PROMPT_PREFIX=''
 ZSH_THEME_GIT_PROMPT_SUFFIX=''
-ZSH_THEME_GIT_PROMPT_DIRTY='%F{$warning} (╯°□°)╯︵┻━┻ '
+ZSH_THEME_GIT_PROMPT_DIRTY='%F{$warning}🔧 '
 ZSH_THEME_GIT_PROMPT_CLEAN=''
 
 ZSH_THEME_GIT_PROMPT_AHEAD="%F{$good}↑"
 ZSH_THEME_GIT_PROMPT_BEHIND="%F{$warning}↓"
 ZSH_THEME_GIT_PROMPT_DIVERGED="%F{$bad}↕"
+ZSH_THEME_GIT_PROMPT_STAGED="%F{$good}●"
+ZSH_THEME_GIT_PROMPT_UNSTAGED="%F{$warning}●"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%F{$bad}●"
 
 # command to make sure the prompt reruns the functions on new prompt
 function precmd {
