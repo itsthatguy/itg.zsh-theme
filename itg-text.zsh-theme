@@ -91,7 +91,7 @@ function itg_git_prompt_status() {
   if $(echo "$_GST" | grep '^## .*diverged' &> /dev/null); then
     _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_DIVERGED"
   fi
-  echo $_STATUS
+  echo "$_STATUS "
 
 }
 
@@ -166,8 +166,8 @@ ZSH_THEME_GIT_PROMPT_DIRTY=''
 ZSH_THEME_GIT_PROMPT_CLEAN=''
 
 ZSH_THEME_GIT_PROMPT_AHEAD="%F{$good}↑"
-ZSH_THEME_GIT_PROMPT_BEHIND="%F{$warning}↓"
-ZSH_THEME_GIT_PROMPT_DIVERGED="%F{$bad}↕"
+ZSH_THEME_GIT_PROMPT_BEHIND="%F{$warning}↓︎"
+ZSH_THEME_GIT_PROMPT_DIVERGED="%F{$bad}⇅"
 
 function itg_colors() {
   for word in $1
@@ -175,17 +175,20 @@ function itg_colors() {
     echo ${(P)word}
   done
 }
+local SYMBOL="◆"
+
 # added
 local git_added_color=$(itg_colors $(git config --get color.status.added))
-ZSH_THEME_GIT_PROMPT_STAGED="%F{$git_added_color}●"
+ZSH_THEME_GIT_PROMPT_STAGED="%F{$git_added_color}$SYMBOL"
 
 # changed
 local git_changed_color=$(git config --get color.status.changed)
-ZSH_THEME_GIT_PROMPT_UNSTAGED="%F{$git_changed_color}●"
+ZSH_THEME_GIT_PROMPT_UNSTAGED="%F{$git_changed_color}$SYMBOL"
 
 # untracked
 local git_untracked_color=$(git config --get color.status.untracked)
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%F{$git_untracked_color}●"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%F{$git_untracked_color}$SYMBOL"
+
 
 # command to make sure the prompt reruns the functions on new prompt
 function precmd {
