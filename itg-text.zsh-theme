@@ -91,7 +91,7 @@ function itg_git_prompt_status() {
   if $(echo "$_GST" | grep '^## .*diverged' &> /dev/null); then
     _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_DIVERGED"
   fi
-  echo "$_STATUS "
+  echo "$_STATUS"
 
 }
 
