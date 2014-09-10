@@ -28,7 +28,10 @@ local bad=$pink
 # Extending the git library locally
 function git_user_initials {
   MSG=$(git config --get user.initials || echo '')
-  print $MSG
+  if [ -n "$MSG" ]; then
+    MSG="$MSG "
+  fi
+  echo $MSG
 }
 
 function git_is_dirty() {
@@ -45,7 +48,7 @@ function git_is_dirty() {
 
 function itg_git_prompt_info() {
   ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-  echo "${ref#refs/heads/}$(parse_git_dirty) $(itg_git_prompt_status)"
+  echo "${ref#refs/heads/}$(parse_git_dirty) $(itg_git_prompt_status) "
 }
 
 function itg_current_branch() {
@@ -133,11 +136,11 @@ function itg_git() {
     git_status=""
   fi
 
-  echo -e "$git_prefix$git_status%F{$normal}$git_suffix"
+  echo -e "$git_prefix$git_status"
 }
 
 function itg_pair() {
-  echo "%F{$normal}$(git_user_initials) "
+  echo "%F{$normal}$(git_user_initials)"
 }
 
 function itg_wrap_right() {
@@ -169,6 +172,6 @@ function precmd {
   ruby_version=${tmp/p/-p}
   PROMPT="
 %F{$dark}$ruby_version
-%F{$cyan}╳ %F{$normal} $(itg_dir)$(itg_git)%F{$normal} $(itg_pair)%f"
+%F{$cyan}╳ %F{$normal} $(itg_dir)$(itg_git)%F{$normal}$(itg_pair)%f"
   RPROMPT="%F{$fade}$(itg_host)"
 }
