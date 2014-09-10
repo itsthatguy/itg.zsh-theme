@@ -11,19 +11,25 @@ local black=235
 local dark=015
 local white=007
 local yellow=003
-local pink=197
+local magenta=197
 local orange=003
 local cyan=006
 local blue=004
 local green=010
 local red=009
 
+local bold=''
+local dim=$dark
+local ul=''
+local blink=''
+local reverse=''
+
 local highlight=$white
 local normal=$red
 local fade=$dark
 local warning=$yellow
 local good=$cyan
-local bad=$pink
+local bad=$magenta
 
 # Extending the git library locally
 function git_user_initials {
@@ -162,9 +168,24 @@ ZSH_THEME_GIT_PROMPT_CLEAN=''
 ZSH_THEME_GIT_PROMPT_AHEAD="%F{$good}↑"
 ZSH_THEME_GIT_PROMPT_BEHIND="%F{$warning}↓"
 ZSH_THEME_GIT_PROMPT_DIVERGED="%F{$bad}↕"
-ZSH_THEME_GIT_PROMPT_STAGED="%F{$warning}●"
-ZSH_THEME_GIT_PROMPT_UNSTAGED="%F{$green}●"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%F{$cyan}●"
+
+function itg_colors() {
+  for word in $1
+  do
+    echo ${(P)word}
+  done
+}
+# added
+local git_added_color=$(itg_colors $(git config --get color.status.added))
+ZSH_THEME_GIT_PROMPT_STAGED="%F{$git_added_color}●"
+
+# changed
+local git_changed_color=$(git config --get color.status.changed)
+ZSH_THEME_GIT_PROMPT_UNSTAGED="%F{$git_changed_color}●"
+
+# untracked
+local git_untracked_color=$(git config --get color.status.untracked)
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%F{$git_untracked_color}●"
 
 # command to make sure the prompt reruns the functions on new prompt
 function precmd {
