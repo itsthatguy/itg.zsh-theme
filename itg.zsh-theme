@@ -93,7 +93,7 @@ function itg_git() {
 }
 
 function itg_pair() {
-  echo " %F{$yellow}$(git_user_initials) %k%F{$darkest_blue}⮀%f"
+  echo " %F{$yellow}$(git_user_initials) %k%F{$darkest_blue}⮀%f "
 }
 
 function itg_wrap_right() {

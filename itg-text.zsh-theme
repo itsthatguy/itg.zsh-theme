@@ -111,7 +111,7 @@ function itg_git() {
 }
 
 function itg_pair() {
-  echo "%F{$normal}$(git_user_initials)"
+  echo "%F{$normal}$(git_user_initials) "
 }
 
 function itg_wrap_right() {
