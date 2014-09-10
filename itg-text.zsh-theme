@@ -178,15 +178,15 @@ function itg_colors() {
 local SYMBOL="◆"
 
 # added
-local git_added_color=$(itg_colors $(git config --get color.status.added))
+local git_added_color=$(itg_colors $(git config --get color.status.added || echo 'green'))
 ZSH_THEME_GIT_PROMPT_STAGED="%F{$git_added_color}$SYMBOL"
 
 # changed
-local git_changed_color=$(git config --get color.status.changed)
+local git_changed_color=$(itg_colors $(git config --get color.status.changed || echo 'red'))
 ZSH_THEME_GIT_PROMPT_UNSTAGED="%F{$git_changed_color}$SYMBOL"
 
 # untracked
-local git_untracked_color=$(git config --get color.status.untracked)
+local git_untracked_color=$(itg_colors $(git config --get color.status.untracked || echo 'red'))
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%F{$git_untracked_color}$SYMBOL"
 
 
