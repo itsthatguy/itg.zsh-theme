@@ -133,7 +133,7 @@ function itg_git() {
 
   # Is this a git directory?
   if git rev-parse --git-dir > /dev/null 2>&1; then
-    git_prefix=" %F{$git_status_color_f}"
+    git_prefix="%F{$git_status_color_f}"
     git_suffix="%F{$git_status_color_f}"
     git_status=$(itg_git_prompt_info)
   else
@@ -196,6 +196,6 @@ function precmd {
   ruby_version=${tmp/p/-p}
   PROMPT="
 %F{$dark}$ruby_version
-%F{$cyan}╳ %F{$normal} $(itg_dir)$(itg_git)%F{$normal}$(itg_pair)%f"
+%F{$cyan}╳ %F{$normal} $(itg_dir) $(itg_git)%F{$normal}$(itg_pair)%f"
   RPROMPT="%F{$fade}$(itg_host)"
 }
