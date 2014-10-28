@@ -1,0 +1,85 @@
+#!/usr/bin/env ruby
+# encoding: utf-8
+
+# Configures the git author to a list of developers when pair programming
+#
+# Usage: pair lm bh (Sets the author to 'Luke Melia and Bryan Helmkamp')
+#        pair       (Unsets the author so the git global config takes effect)
+#
+# Author: Bryan Helmkamp (http://brynary.com)
+# http://www.brynary.com/2008/9/1/setting-the-git-commit-author-to-pair-programmers-names
+
+#######################################################################
+## Configuration
+
+DOMAIN = 'adorable.io'
+
+AUTHORS = {
+  "js" => "Joey Salvador",
+  "rh" => "Ryland Herrick",
+  "jr" => "Jim Remsik",
+  "ka" => "Kevin Altman",
+  "mm" => "Mark McEahern",
+  "ic" => "Ian Cundiff"
+}
+
+## End of configuration
+#######################################################################
+HEADER = '🍐  Pair Script'
+
+def to_sentence(things)
+  if things.size < 3
+    things.join(" and ")
+  else
+    "#{things.first}, #{to_sentence(things.drop(1))}"
+  end
+end
+
+def git_config_set(name, value)
+  `git config "#{name}" "#{value}"`
+  puts "#{name} = \"#{value}\""
+end
+
+def git_config_unset(name)
+  `git config --unset "#{name}"`
+  puts "Unset #{name}"
+end
+
+unless File.exists?(".git")
+  abort "This doesn't look like a git repository."
+end
+
+initials = ARGV.map(&:downcase).map(&:strip).reject(&:empty?).uniq
+
+# HANDLE SPECIFIC COMMANDS
+if initials.include?('list')
+  puts HEADER
+  AUTHORS.map do |initial, name|
+    puts "   #{initial} => #{name}"
+  end
+  abort()
+end
+
+if initials.include?('help')
+  puts HEADER
+  puts 'pair            - unset pair'
+  puts 'pair <initials> - set any number of pears, separated by spaces'
+  puts 'pair list       - list pair users'
+  puts 'pair help       - shows this help'
+end
+
+authors = initials.map do |initial|
+  AUTHORS[initial] or abort("Couldn't find author name for initials: #{initial}")
+end
+
+if authors.any?
+  pair_email = "pair+#{initials.sort.join('+')}@#{DOMAIN}"
+
+  git_config_set('user.name', to_sentence(authors))
+  git_config_set('user.initials', "#{initials.join('/')}")
+  git_config_set('user.email', pair_email)
+else
+  git_config_unset('user.name')
+  git_config_unset('user.initials')
+  git_config_unset('user.email')
+end
