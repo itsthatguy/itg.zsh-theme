@@ -26,7 +26,7 @@ cd itg.zsh-theme
 ### Preview
 
 itg-text.zsh-theme
-![image](http://i.imgur.com/vMatGY0.png)
+![itg.zsh-theme](http://i.imgur.com/AZMd6yo.png)
 
 ### Deprecated version (Unsupported)
 

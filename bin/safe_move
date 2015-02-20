@@ -1,0 +1,94 @@
+#!/usr/bin/env bash
+yellow='\033[1;33m'
+red='\033[1;31m'
+green='\033[1;32m'
+NC='\033[0m' # No Color
+
+
+# Setup the alert function
+alert() {
+  icon='🍗'
+  color=$yellow
+
+  msg=$2
+  if [ -z "$2" ]; then
+    msg=$*
+  else
+    if [ $1 = 'success' ]; then
+      icon='🌵'
+      color=$green
+    elif [ $1 == 'error' ]; then
+      icon='🚑'
+      color=$red
+    fi
+  fi
+  echo -e "$icon ${color} $msg${NC}"
+}
+
+
+
+pre_brew=false
+pre_zsh=false
+pre_oh_my_zsh=false
+check_prereqs() {
+  if type "brew" &> /dev/null; then pre_brew=true; fi
+  if type "zsh" &> /dev/null; then pre_zsh=true; fi
+  if $ZSH; then pre_oh_my_zsh=true; fi
+}
+
+install_prereqs() {
+  # Homebrew
+  if ! $pre_brew; then
+    echo
+    alert error "Homebrew is not installed..."
+    echo
+    echo  "  Install Homebrew before continuing by running:"
+    echo
+    echo  '    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
+    echo
+    echo  "  Read more about Homebrew: http://brew.sh/"
+    exit
+  else
+    alert success "Homebrew is already installed"
+  fi
+
+  # Zsh
+  if $pre_brew && ! $pre_zsh; then
+    local default="Y"
+    alert error "Zsh is not installed..."
+    read -p "Do you want me to install Zsh using Homebrew? [${default}n] " REPLY
+    REPLY=${REPLY:-$default}
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+      brew install zsh
+    else
+      echo
+      echo  "  Install Zsh before continuing by running:"
+      echo
+      echo  '    brew install zsh'
+      echo
+      echo  "  Read more about Zsh: http://www.zsh.org/"
+      exit
+    fi
+  else
+    alert success "Zsh is already installed"
+  fi
+
+  # Oh-my-zsh
+  if ! $pre_oh_my_zsh; then
+    echo
+    alert "Installing Oh-my-zsh..."
+    curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+  else
+    alert success "Oh-my-zsh is already installed"
+  fi
+}
+
+configure() {
+  local default="Y"
+  read -p "Do you want me to install the giggle script? [${default}n] " REPLY
+  REPLY=${REPLY:-$default}
+}
+
+check_prereqs
+install_prereqs
+configure
