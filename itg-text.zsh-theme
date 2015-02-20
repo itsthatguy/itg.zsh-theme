@@ -177,6 +177,10 @@ function itg_colors() {
 }
 local SYMBOL="◆"
 
+function itg_exit_color() {
+  echo -e "%(?.${cyan}.${red})";
+}
+
 # added
 local git_added_color=$(itg_colors $(git config --get color.status.added || echo 'green'))
 ZSH_THEME_GIT_PROMPT_STAGED="%F{$git_added_color}$SYMBOL"
@@ -189,13 +193,10 @@ ZSH_THEME_GIT_PROMPT_UNSTAGED="%F{$git_changed_color}$SYMBOL"
 local git_untracked_color=$(itg_colors $(git config --get color.status.untracked || echo 'red'))
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%F{$git_untracked_color}$SYMBOL"
 
-
 # command to make sure the prompt reruns the functions on new prompt
 function precmd {
   tmp=$(ruby --version | cut -d' ' -f 1-2)
   ruby_version=${tmp/p/-p}
-  PROMPT="
-%F{$dark}$ruby_version
-%F{$cyan}╳ %F{$normal} $(itg_dir) $(itg_git)%F{$normal}$(itg_pair)%f"
+  PROMPT="%F{$(itg_exit_color)}╳ %F{$normal} $(itg_dir) $(itg_git)%F{$normal}$(itg_pair)%f"
   RPROMPT="%F{$fade}$(itg_host)"
 }

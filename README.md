@@ -24,6 +24,12 @@ cd itg.zsh-theme
 
 
 ### Preview
+
+itg-text.zsh-theme
+![image](http://i.imgur.com/vMatGY0.png)
+
+### Deprecated version (Unsupported)
+
 Vanilla
 ![image](http://i.imgur.com/1hf8x.png)
 
@@ -32,8 +38,3 @@ Commit Ahead
 
 Dirty Branch
 ![image](http://i.imgur.com/b3xPc.png)
-
-
-### Extra (currently default)
-itg-text.zsh-theme
-![image](http://i.imgur.com/vMatGY0.png)
