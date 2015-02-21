@@ -195,8 +195,10 @@ ZSH_THEME_GIT_PROMPT_UNTRACKED="%F{$git_untracked_color}$SYMBOL"
 
 # command to make sure the prompt reruns the functions on new prompt
 function precmd {
-  tmp=$(ruby --version | cut -d' ' -f 1-2)
-  ruby_version=${tmp/p/-p}
-  PROMPT="%F{$(itg_exit_color)}╳ %F{$normal} $(itg_dir) $(itg_git)%F{$normal}$(itg_pair)%f"
+  ruby_tmp=$(ruby --version | cut -d' ' -f 1-2)
+  ruby_version="${ruby_tmp/p/-p}"
+  type nvm >/dev/null 2>&1 && node_version=" - node $(nvm current)"
+  PROMPT="%F{$fade}${ruby_version}${node_version}
+%F{$(itg_exit_color)}╳ %F{$normal} $(itg_dir) $(itg_git)%F{$normal}$(itg_pair)%f"
   RPROMPT="%F{$fade}$(itg_host)"
 }
