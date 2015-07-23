@@ -25,8 +25,8 @@
   ln -s $PWD/itg-text.zsh-theme $HOME/.oh-my-zsh/themes/itg-text.zsh-theme
 
   alert "Backing up and installing .zshrc and .zshenv..."
-  mv $HOME/.zshrc $HOME/.zshrc_BACKUP
-  mv $HOME/.zshenv $HOME/.zshenv_BACKUP
+  mv $HOME/.zshrc $HOME/.zshrc_BACKUP || echo "no .zshrc file to backup"
+  mv $HOME/.zshenv $HOME/.zshenv_BACKUP || echo "no .zshenv file to backup"
   cp $PWD/.zshrc $HOME/.zshrc
   cp $PWD/.zshenv $HOME/.zshenv
 
