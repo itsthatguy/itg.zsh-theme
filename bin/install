@@ -49,7 +49,7 @@
   echo
   alert "I'm fairly certain I'm done..."
   echo
-  echo  "  You're turn."
+  echo  "  Your turn."
   echo  "  * edit the following files to fit your needs: "
   echo  "    * ~/.zshenv"
   echo  "    * ~/.zshrc"
