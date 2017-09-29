@@ -14,7 +14,7 @@
   }
 
 # Cleanup before install
-  rm -f $HOME/.scripts/words.json $HOME/.scripts/random_giggle.rb $HOME/.oh-my-zsh/themes/itg.zsh-theme $HOME/.oh-my-zsh/themes/itg-text.zsh-theme
+  rm -rf $HOME/.scripts/words.json $HOME/.scripts/random_giggle.rb $HOME/.oh-my-zsh/themes/itg.zsh-theme $HOME/.oh-my-zsh/themes/itg-text.zsh-theme
 
 
 # Connecting files to where they go
