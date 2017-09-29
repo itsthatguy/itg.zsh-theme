@@ -31,6 +31,16 @@
   cp $PWD/.zshenv $HOME/.zshenv
 
   alert "Adding supplemental scripts..."
+  if [ -e $HOME/.scripts/aliases.sh ] 
+    then
+      alert "Backing up aliases.sh"
+      mv $HOME/.scripts/aliases.sh $HOME/.scripts/aliases.sh_BACKUP_$(date +%F_%T)
+  fi
+  if [ -e $HOME/.scripts/env.sh ] 
+    then
+      alert "Backing up env.sh"
+      mv $HOME/.scripts/env.sh $HOME/.scripts/env.sh_BACKUP_$(date +%F_%T)
+  fi
   mkdir -p $HOME/.scripts
   ln -s $PWD/scripts/words.json $HOME/.scripts/words.json
   ln -s $PWD/scripts/random_giggle.rb $HOME/.scripts/random_giggle.rb
