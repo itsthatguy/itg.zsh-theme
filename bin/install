@@ -14,7 +14,7 @@
   }
 
 # Cleanup before install
-  rm -f $HOME/.scripts/words.json $HOME/.scripts/random_giggle.rb $HOME/.oh-my-zsh/themes/itg.zsh-theme $HOME/.oh-my-zsh/themes/itg-text.zsh-theme
+  rm -rf $HOME/.scripts/words.json $HOME/.scripts/random_giggle.rb $HOME/.oh-my-zsh/themes/itg.zsh-theme $HOME/.oh-my-zsh/themes/itg-text.zsh-theme
 
 
 # Connecting files to where they go
@@ -25,12 +25,22 @@
   ln -s $PWD/itg-text.zsh-theme $HOME/.oh-my-zsh/themes/itg-text.zsh-theme
 
   alert "Backing up and installing .zshrc and .zshenv..."
-  mv $HOME/.zshrc $HOME/.zshrc_BACKUP
-  mv $HOME/.zshenv $HOME/.zshenv_BACKUP
+  mv $HOME/.zshrc $HOME/.zshrc_BACKUP_$(date +%F_%T)
+  mv $HOME/.zshenv $HOME/.zshenv_BACKUP_$(date +%F_%T)
   cp $PWD/.zshrc $HOME/.zshrc
   cp $PWD/.zshenv $HOME/.zshenv
 
   alert "Adding supplemental scripts..."
+  if [ -e $HOME/.scripts/aliases.sh ] 
+    then
+      alert "Backing up aliases.sh"
+      mv $HOME/.scripts/aliases.sh $HOME/.scripts/aliases.sh_BACKUP_$(date +%F_%T)
+  fi
+  if [ -e $HOME/.scripts/env.sh ] 
+    then
+      alert "Backing up env.sh"
+      mv $HOME/.scripts/env.sh $HOME/.scripts/env.sh_BACKUP_$(date +%F_%T)
+  fi
   mkdir -p $HOME/.scripts
   ln -s $PWD/scripts/words.json $HOME/.scripts/words.json
   ln -s $PWD/scripts/random_giggle.rb $HOME/.scripts/random_giggle.rb
